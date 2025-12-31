@@ -1,12 +1,13 @@
 # Utilise l'image PHP avec Apache
 FROM php:8.4-apache
 
-# Installe les extensions PHP nécessaires
+# Installe les extensions PHP nécessaires et les dépendances système
 RUN apt-get update && apt-get install -y \
     libpq-dev \
+    libzip-dev \ 
     zip \
     unzip \
-    && docker-php-ext-install pdo pdo_pgsql pgsql zip libzip
+    && docker-php-ext-install pdo pdo_pgsql pgsql zip
 
 # Installe Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer

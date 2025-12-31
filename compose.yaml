@@ -9,12 +9,10 @@ services:
     environment:
       - DATABASE_URL=postgresql://postgres:vTrDLmISQPajxoWRTiWPOykaMDbqGgzl@caboose.proxy.rlwy.net:14363/railway
       - APP_ENV=prod
-      - APP_SECRET=your_secret_key
-      - PORT=80  # Assure-toi que le port est bien défini (Railway le gérera automatiquement)
     volumes:
       - .:/var/www/html
     ports:
-      - "$PORT:$PORT"  # Mappe le port dynamique à la même valeur
+      - "80"
     networks:
       - app_network
 

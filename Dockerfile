@@ -17,3 +17,8 @@ EXPOSE 80
 
 # Démarre Apache
 CMD ["apache2-foreground"]
+
+# Configure Apache pour écouter sur le port dynamique
+RUN sed -i 's/80/$PORT/g' /etc/apache2/ports.conf
+RUN sed -i 's/80/$PORT/g' /etc/apache2/sites-available/000-default.conf
+

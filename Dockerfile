@@ -12,11 +12,11 @@ COPY . /var/www/html/
 # Active Apache mod_rewrite pour Symfony
 RUN a2enmod rewrite
 
-# Modifie la configuration d'Apache pour écouter sur 0.0.0.0:80
-RUN sed -i 's/Listen 80/Listen 0.0.0.0:80/' /etc/apache2/ports.conf
+# Modifie la configuration d'Apache pour écouter sur toutes les interfaces
+RUN sed -i 's/Listen 80/Listen $PORT/' /etc/apache2/ports.conf
 RUN sed -i 's/80/$PORT/g' /etc/apache2/sites-available/000-default.conf
 
-# Expose le port Apache
+# Expose le port Apache (en utilisant la variable d'environnement)
 EXPOSE 80
 
 # Démarre Apache

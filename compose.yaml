@@ -9,10 +9,11 @@ services:
     environment:
       - DATABASE_URL=postgresql://postgres:vTrDLmISQPajxoWRTiWPOykaMDbqGgzl@caboose.proxy.rlwy.net:14363/railway
       - APP_ENV=prod
+      - PORT=8080   # Optionnel si tu veux explicitement définir le port pour ton app
     volumes:
       - .:/var/www/html
     ports:
-      - "$PORT:$PORT"  # Utilisation du port dynamique de Railway
+      - "8080:8080"  # Utilise un port fixe (8080)
     networks:
       - app_network
 

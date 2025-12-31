@@ -13,7 +13,6 @@ class TestDbController extends AbstractController
     #[Route('/api/db-test', name: 'app_db_test')]
     public function dbTest(Connection $connection): JsonResponse
     {
-        dd($connection);
         try {
             // Tentative de connexion et récupération d'une simple requête
             $result = $connection->fetchOne('SELECT 1');

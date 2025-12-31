@@ -15,6 +15,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copie les fichiers de ton projet
 COPY . /var/www/html/
 
+# Vider le cache de Composer avant d'installer les dépendances
+RUN composer clear-cache
+
 # Installe les dépendances PHP de ton projet
 RUN cd /var/www/html && composer install --no-dev --optimize-autoloader
 
@@ -27,11 +30,6 @@ RUN sed -i 's/80/$PORT/g' /etc/apache2/sites-available/000-default.conf
 
 # Expose le port Apache
 EXPOSE 80
-
-# Script d'entrée pour injecter DATABASE_URL dans Apache
-COPY ./apache/envvars.sh /etc/apache2/envvars.sh
-RUN chmod +x /etc/apache2/envvars.sh
-RUN echo "source /etc/apache2/envvars.sh" >> /etc/apache2/envvars
 
 # Démarre Apache
 CMD ["apache2-foreground"]

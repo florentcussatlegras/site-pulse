@@ -19,7 +19,7 @@ COPY . /var/www/html/
 RUN composer clear-cache
 
 # Installe les dépendances PHP de ton projet
-RUN cd /var/www/html && composer install --no-dev --optimize-autoloader
+RUN cd /var/www/html && composer install --optimize-autoloader
 
 # Active Apache mod_rewrite pour Symfony
 RUN a2enmod rewrite

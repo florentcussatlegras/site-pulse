@@ -2,11 +2,11 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/912.js",
-        "/build/app.js"
+        "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_mini-css-extract-plug-e524f5.js",
+        "http://localhost:8080/build/app.js"
       ],
       "css": [
-        "/build/app.css"
+        "http://localhost:8080/build/app.css"
       ]
     }
   }

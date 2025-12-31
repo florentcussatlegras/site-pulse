@@ -21,6 +21,12 @@ RUN composer clear-cache
 # Installe les dépendances PHP de ton projet
 RUN cd /var/www/html && composer install --optimize-autoloader
 
+# Installe les dépendances JavaScript
+RUN cd /var/www/html && npm install
+
+# Compile les assets (génère entrypoints.json et autres fichiers dans /public/build)
+RUN cd /var/www/html && npm run build --production
+
 # Active Apache mod_rewrite pour Symfony
 RUN a2enmod rewrite
 

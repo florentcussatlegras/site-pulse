@@ -1,6 +1,5 @@
 {
-  "build/app.css": "http://localhost:8080/build/app.css",
-  "build/app.js": "http://localhost:8080/build/app.js",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_mini-css-extract-plug-e524f5.js": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_mini-css-extract-plug-e524f5.js",
-  "build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_mini-css-extract-plug-963aaf.js": "http://localhost:8080/build/vendors-node_modules_symfony_stimulus-bridge_dist_index_js-node_modules_mini-css-extract-plug-963aaf.js"
+  "build/app.css": "/build/app.css",
+  "build/app.js": "/build/app.js",
+  "build/440.js": "/build/440.js"
 }

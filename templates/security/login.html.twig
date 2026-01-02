@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+
+    {% include 'components/ui/card.html.twig' with {
+        content: '
+            <h1 class="text-3xl font-bold mb-4 text-neutral-900">Identifiez-vous</h1>
+
+            ' ~ include("pages/partials/_alert.html.twig") ~ '
+
+            ' ~ (error ? '<div class="alert alert-danger my-6">' ~ error.messageKey|trans(error.messageData, "security") ~ '</div>' : '') ~
+
+            '<form action="' ~ path("app_login") ~ '" method="post" class="flex flex-col gap-4">
+                <label class="flex flex-col text-sm font-medium">
+                    Email :
+                    <input type="email" name="_username" required class="mt-1 rounded-xl border border-neutral-200 p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                </label>
+
+                <label class="flex flex-col text-sm font-medium">
+                    Mot de passe :
+                    <input type="password" name="_password" required class="mt-1 rounded-xl border border-neutral-200 p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <p class="ml-auto text-sm mt-2">
+                        <a href="' ~ path("app_forgot_password") ~ '" class="text-indigo-600 hover:underline">Mot de passe oublié ?</a>
+                    </p>
+                </label>
+
+                <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="' ~ csrf_token('authenticate') ~ '">
+                ' ~ include("components/ui/button.html.twig", {
+                    label: "Se connecter",
+                    type: "submit",
+                    variant: "primary",
+                    class: "mt-2 w-full flex justify-center"
+                }) ~ '
+            </form>
+
+            <p class="mt-4 text-sm">
+                Pas encore de compte ? <a href="' ~ path("app_register") ~ '" class="text-indigo-600 hover:underline">Inscrivez-vous</a>
+            </p>
+        ',
+        class: 'max-w-xl'
+    } %}
+
+{% endblock %}

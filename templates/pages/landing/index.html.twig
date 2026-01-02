@@ -1,66 +1,40 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Redirection...</title>
+    <script>
+        // redirection vers /app après chargement
+        window.location.href = "{{ target }}";
+    </script>
+    <style>
+        /* Spinner simple avec animation */
+        .spinner {
+            border: 8px solid #f3f3f3; /* gris clair */
+            border-top: 8px solid #6366f1; /* indigo-500 */
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
 
-{% block title %}SitePulse – Audit de site{% endblock %}
+        @keyframes spin {
+            0%   { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-{% block body %}
-
-    <section class="w-full min-h-screen flex flex-col items-center justify-center bg-neutral-50 px-4 text-center space-y-6 border">
-
-        <a href="/" class="flex items-center gap-2 mb-24">
-            <img src="{{ asset('images/logo_site_pulse.png') }}" width="50px" alt="Logo" />
-            <h1 class="font-brand text-4xl text-indigo-500 font-bold">SitePulse</h1>
-        </a>
-
-        {# Hero #}
-        <div class="max-w-3xl">
-            <h1 class="text-5xl font-bold mb-4 text-neutral-900">Analysez votre site en un clic</h1>
-            <p class="text-neutral-700 mb-6">
-                Obtenez un audit complet SEO, performance et accessibilité avec recommandations.
-            </p>
-        </div>
-
-        {# Formulaire URL #}
-        {% include 'components/ui/card.html.twig' with {
-            content: '
-                <form action="#" method="POST" class="flex flex-col sm:flex-row gap-2">
-                    <input type="url" name="url" placeholder="https://exemple.com" class="flex-1 rounded-xl border border-neutral-200 p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
-                    <button class="inline-flex items-center gap-2 rounded-xl px-4 py-2 font-semibold transition bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500">Lancer l\'audit</button>
-                </form>
-            ',
-            class: 'max-w-xl'
-        } %}
-
-        {% set dashboard_content %}
-            <h2 class="text-xl font-bold mb-4">Aperçu du dashboard</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
-                <div class="rounded-2xl border-neutral-200 bg-white shadow-soft p-6">
-                    <span class="text-sm font-semibold text-neutral-500">Performance</span>
-                    <p class="text-2xl font-bold text-neutral-900 mt-1">98%</p>
-                    {{ include("components/ui/badge.html.twig", {label: 'Score'}) }}
-                </div>
-                <div class="rounded-2xl border-neutral-200 bg-white shadow-soft p-6">
-                    <span class="text-sm font-semibold text-neutral-500">SEO</span>
-                    <p class="text-2xl font-bold text-neutral-900 mt-1">87%</p>
-                    {{ include("components/ui/badge.html.twig", {label: 'Score'}) }}
-                </div>
-                <div class="rounded-2xl border-neutral-200 bg-white shadow-soft p-6">
-                    <span class="text-sm font-semibold text-neutral-500">Accessibilité</span>
-                    <p class="text-2xl font-bold text-neutral-900 mt-1">91%</p>
-                    {{ include("components/ui/badge.html.twig", {label: 'Score'}) }}
-                </div>
-                <div class="rounded-2xl border-neutral-200 bg-white shadow-soft p-6">
-                    <span class="text-sm font-semibold text-neutral-500">Bonnes pratiques</span>
-                    <p class="text-2xl font-bold text-neutral-900 mt-1">85%</p>
-                    {{ include("components/ui/badge.html.twig", {label: 'Score'}) }}
-                </div>
-            </div>
-        {% endset %}
-
-        {# Preview Dashboard #}
-        {% include 'components/ui/card.html.twig' with {
-            content: dashboard_content,
-            class: 'max-w-6xl'
-        } %}
-    </section>
-
-{% endblock %}
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9fafb; /* bg-neutral-50 */
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="spinner"></div>
+</body>
+</html>

@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
+use App\Service\AuditRunner;
+
 #[Route('/api/audits')]
 class AuditController extends AbstractController
 {
@@ -32,11 +34,40 @@ class AuditController extends AbstractController
         $em->flush();
 
         return $this->json([
-            'id' => $audit->getId()
+            'audit' => $audit
         ]);
     }
 
-    #[Route('/{id}', name: 'api_audit_show', methods: ['GET'])]
+    #[Route('/run', name: 'api_audit_run', methods: ['POST'])]
+    public function run(
+        Request $request,
+        EntityManagerInterface $em,
+        AuditRunner $auditRunner
+    ): JsonResponse {
+        $data = json_decode($request->getContent(), true);
+        $url = $data['url'] ?? null;
+
+        if (!$url) {
+            return $this->json(['error' => 'URL manquante'], 400);
+        }
+
+        $result = $auditRunner->run($url);
+
+        $audit = new Audit();
+        $audit->setUrl($url);
+        $audit->setPerformance($result['performance']);
+        $audit->setSeo($result['seo']);
+        $audit->setAccessibility($result['accessibility']);
+        $audit->setBestPractices($result['bestPractices']);
+        $audit->setRecommendations($result['recommendations']);
+
+        $em->persist($audit);
+        $em->flush();
+
+        return $this->json($audit);
+    }
+
+    #[Route('/show/{id}', name: 'api_audit_show', methods: ['GET'], requirements: ['id' => '\d+'])]
     public function show(int $id, AuditRepository $auditRepository): JsonResponse
     {
         $audit = $auditRepository->find($id);

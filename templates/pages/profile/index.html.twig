@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Profil{% endblock %}
+
+{% block body %}
+<section class="w-full min-h-screen flex flex-col items-center bg-neutral-50 px-4 py-10">
+    
+    <div class="max-w-4xl w-full flex flex-col gap-8">
+        <!-- Section utilisateur -->
+        <div class="bg-white rounded-2xl shadow-soft p-6 flex flex-col sm:flex-row items-center gap-6">
+            <!-- Avatar -->
+            <div class="w-20 h-20 rounded-full bg-indigo-600 flex items-center justify-center text-white text-4xl font-bold">
+                {{ app.user.email|slice(0,1)|upper }}
+            </div>
+            
+            <!-- Infos -->
+            <div class="flex-1">
+                <h2 class="text-xl font-bold text-neutral-900 flex items-center gap-2">
+                    Bonjour, {{ app.user.email }}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </h2>
+                <p class="text-neutral-500 text-sm">Membre depuis le {{ app.user.createdAt|date('d/m/Y') }}</p>
+            </div>
+
+            <!-- Action -->
+            <div>
+                <a href="{{ path('app_logout') }}" class="inline-flex items-center gap-2 rounded-xl px-4 py-2 font-semibold transition focus:outline-none focus:ring-2 bg-red-600 text-white hover:bg-red-700 focus:ring-red-500">
+                    {# <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7" />
+                    </svg> #}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1"></path>
+                    </svg>
+                    Déconnexion
+                </a>
+            </div>
+        </div>
+
+        <!-- Historique des audits -->
+        <div class="bg-white rounded-2xl shadow-soft p-6 w-full">
+            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-6h13" />
+                </svg>
+                Historique des audits
+            </h3>
+
+            {% if audits|length > 0 %}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {% for audit in audits %}
+                        <div class="border border-neutral-200 rounded-xl p-4 flex flex-col gap-2 hover:shadow-md transition">
+                            <span class="text-sm text-neutral-500">{{ audit.createdAt|date('d/m/Y H:i') }}</span>
+                            <h4 class="font-semibold text-neutral-900 flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l4-4m0 0l-4-4m4 4H6" />
+                                </svg>
+                                {{ audit.url }}
+                            </h4>
+                            <div class="flex flex-wrap gap-2 mt-2">
+                                <span class="flex items-center gap-1 px-2 py-1 bg-indigo-100 text-indigo-800 rounded-full text-xs">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" />
+                                    </svg>
+                                    Perf: {{ audit.performance }}%
+                                </span>
+                                <span class="flex items-center gap-1 px-2 py-1 bg-green-100 text-green-800 rounded-full text-xs">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    SEO: {{ audit.seo }}%
+                                </span>
+                                <span class="flex items-center gap-1 px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4" />
+                                    </svg>
+                                    Access: {{ audit.accessibility }}%
+                                </span>
+                                <span class="flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-800 rounded-full text-xs">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    BP: {{ audit.bestPractices }}%
+                                </span>
+                            </div>
+                            <a href="{{ path('report_show', {'id': audit.id}) }}" class="text-indigo-600 hover:underline mt-2 text-sm">Voir le rapport</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-neutral-500">Vous n’avez encore aucun audit.</p>
+            {% endif %}
+        </div>
+
+        <!-- CTA nouveau audit -->
+        <div class="flex justify-center mt-4">
+            <a href="{{ path('app_home') }}" class="inline-flex items-center gap-2 rounded-xl px-6 py-3 font-semibold transition focus:outline-none focus:ring-2 bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                </svg>
+                Nouveau audit
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

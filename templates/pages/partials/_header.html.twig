@@ -1,0 +1,41 @@
+<header class="w-full bg-white shadow p-4 flex justify-between items-center">
+    {% include "pages/partials/_brand.html.twig" %}
+
+    <nav class="flex items-center gap-4">
+        {% if app.user %}
+            
+            <div {{ stimulus_controller('dropdown') }} class="relative inline-block text-left">
+                <!-- Avatar cliquable -->
+                <div 
+                    data-action="click->dropdown#toggle" 
+                    class="w-10 h-10 flex items-center justify-center rounded-full bg-indigo-100 text-indigo-600 font-bold text-xl cursor-pointer select-none">
+                    {{ app.user.email|slice(0,1)|upper }}
+                </div>
+
+                <!-- Dropdown menu -->
+                <div 
+                    data-dropdown-target="menu" 
+                    class="origin-top-right absolute right-0 mt-2 w-40 rounded-xl shadow-lg bg-white hidden z-10">
+                    <div class="py-1 flex flex-col">
+                        <a href="{{ path('app_profile_index') }}" class="flex px-4 py-2 text-sm text-neutral-900 hover:bg-indigo-50 items-center gap-2">
+                            <!-- Icône profil -->
+                            <svg viewBox="0 0 20 20" class="h-4 w-4 text-red-600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>profile_round [#1342]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-140.000000, -2159.000000)" fill="#000000"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M100.562548,2016.99998 L87.4381713,2016.99998 C86.7317804,2016.99998 86.2101535,2016.30298 86.4765813,2015.66198 C87.7127655,2012.69798 90.6169306,2010.99998 93.9998492,2010.99998 C97.3837885,2010.99998 100.287954,2012.69798 101.524138,2015.66198 C101.790566,2016.30298 101.268939,2016.99998 100.562548,2016.99998 M89.9166645,2004.99998 C89.9166645,2002.79398 91.7489936,2000.99998 93.9998492,2000.99998 C96.2517256,2000.99998 98.0830339,2002.79398 98.0830339,2004.99998 C98.0830339,2007.20598 96.2517256,2008.99998 93.9998492,2008.99998 C91.7489936,2008.99998 89.9166645,2007.20598 89.9166645,2004.99998 M103.955674,2016.63598 C103.213556,2013.27698 100.892265,2010.79798 97.837022,2009.67298 C99.4560048,2008.39598 100.400241,2006.33098 100.053171,2004.06998 C99.6509769,2001.44698 97.4235996,1999.34798 94.7348224,1999.04198 C91.0232075,1998.61898 87.8750721,2001.44898 87.8750721,2004.99998 C87.8750721,2006.88998 88.7692896,2008.57398 90.1636971,2009.67298 C87.1074334,2010.79798 84.7871636,2013.27698 84.044024,2016.63598 C83.7745338,2017.85698 84.7789973,2018.99998 86.0539717,2018.99998 L101.945727,2018.99998 C103.221722,2018.99998 104.226185,2017.85698 103.955674,2016.63598" id="profile_round-[#1342]"> </path> </g> </g> </g> </g></svg>
+                            Mon profil
+                        </a>
+                        <a href="{{ path('app_logout') }}" class="flex px-4 py-2 text-sm text-red-600 hover:bg-red-50 items-center gap-2">
+                            <!-- Icône déconnexion -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h6a2 2 0 012 2v1" />
+                            </svg>
+                            Déconnexion
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        {% else %}
+            <a href="{{ path('app_login') }}" class="text-indigo-600 hover:text-white bg-white hover:bg-indigo-600 border px-4 py-2 rounded-xl transition duration-300">Connexion</a>
+            <a href="{{ path('app_register') }}" class="inline-flex items-center gap-2 rounded-xl px-4 py-2 font-semibold transition focus:outline-none focus:ring-2 bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-primary-500 ">S'inscrire</a>
+        {% endif %}
+    </nav>
+</header>

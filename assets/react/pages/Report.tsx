@@ -29,7 +29,7 @@ export default function Report() {
         if (!id) return;
 
         setIsLoading(true);
-        fetch(`/api/audits/${id}`)
+        fetch(`/api/audits/show/${id}`)
             .then((res) => {
                 if (!res.ok) throw new Error("Audit non trouvé");
                 return res.json();
@@ -61,10 +61,6 @@ export default function Report() {
     return (
         <PageTransition>
             <section className="min-h-screen bg-neutral-50 px-4 py-10 w-full">
-                {/* Brand centrée */}
-                <div className="flex justify-center mb-8">
-                    <Brand />
-                </div>
 
                 {/* Header */}
                 <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between mb-8">
@@ -72,7 +68,7 @@ export default function Report() {
                         Rapport d’audit
                     </h1>
 
-                    <Link to="/app">
+                    <Link to="/">
                         <Button variant="outline">← Nouvel audit</Button>
                     </Link>
                 </div>
@@ -81,8 +77,9 @@ export default function Report() {
                 <Card className="max-w-6xl mx-auto text-center space-y-2 mb-8">
                     <h2 className="text-xl font-semibold">Résumé</h2>
                     <p className="text-neutral-600">
-                        Votre site est globalement bien optimisé, mais certaines
-                        améliorations peuvent encore renforcer ses performances.
+                        {results.recommendations.length > 0
+                            ? "Des optimisations sont recommandées pour améliorer les performances de votre site."
+                            : "Votre site est bien optimisé selon nos critères actuels."}
                     </p>
                 </Card>
 
@@ -114,22 +111,21 @@ export default function Report() {
                         Recommandations prioritaires
                     </h2>
                     <ul className="space-y-2 text-neutral-700">
-                        <li>
-                            ⚡ Optimiser le chargement des images (formats
-                            modernes).
-                        </li>
-                        <li>🔍 Ajouter des balises meta manquantes.</li>
-                        <li>♿ Améliorer le contraste des textes.</li>
-                        <li>
-                            🛡️ Mettre à jour certaines bonnes pratiques de
-                            sécurité.
-                        </li>
+                        {results.recommendations.length === 0 && (
+                            <li className="text-green-600 font-medium">
+                                🎉 Aucune recommandation critique détectée
+                            </li>
+                        )}
+
+                        {results.recommendations.map((rec, index) => (
+                            <li key={index}>• {rec}</li>
+                        ))}
                     </ul>
                 </Card>
 
                 {/* CTA final */}
                 <div className="flex justify-center mb-10">
-                    <Link to="/app">
+                    <Link to="/">
                         <Button>Relancer un audit</Button>
                     </Link>
                 </div>

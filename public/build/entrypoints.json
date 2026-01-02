@@ -2,7 +2,7 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/912.js",
+        "/build/440.js",
         "/build/app.js"
       ],
       "css": [

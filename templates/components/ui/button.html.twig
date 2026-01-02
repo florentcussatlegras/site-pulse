@@ -9,7 +9,7 @@
 {% set iconPosition = iconPosition|default('left') %}
 
 {% if href is defined %}
-    <a href="{{ href }}" class="inline-flex items-center gap-2 rounded-xl px-4 py-2 font-semibold transition focus:outline-none focus:ring-2 {{ variants[variant|default('primary')] }} {{ class|default('') }}">
+    <a href="{{ href }}" class="inline-flex items-center gap-2 rounded-xl px-4 py-2 transition focus:outline-none focus:ring-2 {{ variants[variant|default('primary')] }} {{ class|default('') }}">
         {# Icône à gauche #}
         {% if icon is defined and iconPosition == 'left' %}
             <span class="inline-flex items-center">

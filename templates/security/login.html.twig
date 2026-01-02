@@ -12,7 +12,7 @@
 
             ' ~ (error ? '<div class="alert alert-danger my-6">' ~ error.messageKey|trans(error.messageData, "security") ~ '</div>' : '') ~
 
-            '<form action="' ~ path("app_login") ~ '" method="post" class="flex flex-col gap-4">
+            '<form action="' ~ absolute_url("app_login") ~ '" method="post" class="flex flex-col gap-4">
                 <label class="flex flex-col text-sm font-medium">
                     Email :
                     <input type="email" name="_username" required class="mt-1 rounded-xl border border-neutral-200 p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">

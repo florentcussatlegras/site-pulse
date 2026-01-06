@@ -1,6 +1,6 @@
-// tailwind.config.js
-export default {
-  darkMode: ['class'], // ✅ dark activé uniquement avec class="dark"
+
+/** @type {import('tailwindcss').Config} */
+const config = {
   content: [
     './templates/**/*.html.twig',       // tous les templates Twig
     './assets/react/**/*.{js,ts,jsx,tsx}', // tous les fichiers React/TSX
@@ -12,8 +12,11 @@ export default {
       }
     },
   },
+  darkMode: "class",
   plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
+    // require('@tailwindcss/forms'),
+    // require('@tailwindcss/typography'),
   ],
-};
+}
+
+module.exports = config;

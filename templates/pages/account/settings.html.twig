@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification du mot de passe{% endblock %}
+
+{% block body %}
+
+
+<a href="{{ path('app_profile_index') }}" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 rounded-xl text-white">Revenir au profil</a>
+
+<div class="max-w-4xl mx-auto mt-10 p-6 bg-color-card rounded-2xl shadow-soft">
+    <h1 class="text-2xl font-bold mb-6 text-primary">
+        Modification du mot de passe
+    </h1>
+
+    <div class="shadow-soft rounded-2xl p-6">
+
+        {% for message in app.flashes('success') %}
+            <div class="mb-4 p-3 rounded-lg bg-green-100 text-green-700">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {{ form_start(passwordForm, { attr: { 'data-turbo': 'false', 'class': 'space-y-4' } }) }}
+
+            <div>
+                {% for error in passwordForm.currentPassword.vars.errors %}
+                    <div class="alert alert-danger mt-2">{{ error.message }}</div>
+                {% endfor %}
+                {{ form_label(passwordForm.currentPassword, null, {'label_attr': {'class': 'text-primary'}}) }}
+                {{ form_widget(passwordForm.currentPassword, {
+                    attr: {
+                        class: 'w-full rounded-xl border border-color-input bg-color-input text-primary p-3 focus:ring-2 focus:ring-indigo-500'
+                    }
+                }) }}
+            </div>
+
+            <div>
+                {# Affiche les erreurs du champ "first" seulement #}
+                {% for error in passwordForm.newPassword.first.vars.errors %}
+                    <div class="alert alert-danger mt-2">{{ error.message }}</div>
+                {% endfor %}
+                {{ form_label(passwordForm.newPassword.first, null, {'label_attr': {'class': 'text-primary'}}) }}
+                {{ form_widget(passwordForm.newPassword.first, {
+                    attr: {
+                        class: 'w-full rounded-xl border border-color-input bg-color-input text-primary p-3 focus:ring-2 focus:ring-indigo-500'
+                    }
+                }) }}
+            </div>
+
+            <div>
+                {{ form_label(passwordForm.newPassword.second, null, {'label_attr': {'class': 'text-primary'}}) }}
+                {{ form_widget(passwordForm.newPassword.second, {
+                    attr: {
+                        class: 'w-full rounded-xl border border-color-input bg-color-input text-primary p-3 focus:ring-2 focus:ring-indigo-500'
+                    }
+                }) }}
+                {{ form_errors(passwordForm.newPassword.second) }}
+            </div>
+
+            <button
+                type="submit"
+                class="w-full mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition"
+            >
+                Mettre à jour le mot de passe
+            </button>
+
+        {{ form_end(passwordForm) }}
+    </div>
+</div>
+{% endblock %}

@@ -45,6 +45,7 @@ class AuditController extends AbstractController
         AuditRunner $auditRunner
     ): JsonResponse {
         $data = json_decode($request->getContent(), true);
+        // dd($request->getContent());
         $url = $data['url'] ?? null;
 
         if (!$url) {
@@ -55,6 +56,9 @@ class AuditController extends AbstractController
 
         $audit = new Audit();
         $audit->setUrl($url);
+        if ($this->getUser()) {
+            $audit->setUser($this->getUser());
+        }
         $audit->setPerformance($result['performance']);
         $audit->setSeo($result['seo']);
         $audit->setAccessibility($result['accessibility']);
@@ -64,7 +68,14 @@ class AuditController extends AbstractController
         $em->persist($audit);
         $em->flush();
 
-        return $this->json($audit);
+        return $this->json([
+            'id' => $audit->getId(),
+            'performance' => $audit->getPerformance(),
+            'seo' => $audit->getSeo(),
+            'accessibility' => $audit->getAccessibility(),
+            'bestPractices' => $audit->getBestPractices(),
+        ]);
+
     }
 
     #[Route('/show/{id}', name: 'api_audit_show', methods: ['GET'], requirements: ['id' => '\d+'])]

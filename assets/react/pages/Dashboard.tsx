@@ -18,7 +18,7 @@ export default function Dashboard({ results }: Props) {
 
   return (
     <Card className="w-full max-w-6xl">
-      <h2 className="text-xl font-bold mb-6">Aperçu du dashboard</h2>
+      <h2 className="text-xl font-bold mb-6 text-primary">Aperçu du dashboard</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <ScoreCard label="Performance" score={results.performance} />

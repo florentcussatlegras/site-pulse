@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rapport d’audit{% endblock %}
+
+{% block body %}
+<section class="min-h-screen bg-content px-4 py-10 w-full">
+
+    {# Header #}
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between mb-8">
+        <h1 class="text-2xl font-bold mb-4 sm:mb-0 text-primary">
+            Rapport d’audit
+        </h1>
+
+        <a href="{{ path('app_home') }}"
+           class="inline-flex items-center px-4 py-2 border rounded-lg
+                  text-button-secondary bg-button-secondary border-color-button-secondary
+                  hover:opacity-80 transition">
+            ← Nouvel audit
+        </a>
+    </div>
+
+    {# Résumé global #}
+    <div class="max-w-6xl mx-auto text-center space-y-2 mb-8 bg-card-color rounded-2xl p-6">
+        <h2 class="text-xl font-semibold text-primary">Résumé</h2>
+        <p class="text-neutral-600">
+            {% if audit.recommendations is not empty %}
+                Des optimisations sont recommandées pour améliorer les performances de votre site.
+            {% else %}
+                Votre site est bien optimisé selon nos critères actuels.
+            {% endif %}
+        </p>
+    </div>
+
+    {# Scores #}
+    <div class="max-w-6xl mx-auto mb-8 p-6 bg-white rounded-2xl shadow">
+        <h2 class="text-lg font-bold mb-6 text-center text-primary">
+            Scores par catégorie
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+            {% include 'pages/audit/_score_card.html.twig' with { label: 'Performance', score: audit.performance } %}
+            {% include 'pages/audit/_score_card.html.twig' with { label: 'SEO', score: audit.seo } %}
+            {% include 'pages/audit/_score_card.html.twig' with { label: 'Accessibilité', score: audit.accessibility } %}
+            {% include 'pages/audit/_score_card.html.twig' with { label: 'Bonnes pratiques', score: audit.bestPractices } %}
+        </div>
+    </div>
+
+    {# Recommandations #}
+    <div class="max-w-6xl mx-auto space-y-4 mb-8 p-6 bg-white rounded-2xl shadow">
+        <h2 class="text-lg font-bold text-primary">
+            Recommandations prioritaires
+        </h2>
+
+        <ul class="space-y-2 text-neutral-700">
+            {% if audit.recommendations is empty %}
+                <li class="text-green-600 font-medium">
+                    🎉 Aucune recommandation critique détectée
+                </li>
+            {% else %}
+                {% for rec in audit.recommendations %}
+                    <li>• {{ rec }}</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+
+    {# CTA final #}
+    <div class="flex justify-center mb-10">
+        <a href="{{ path('app_home') }}"
+           class="px-6 py-3 bg-sky-600 text-white rounded-lg
+                  hover:bg-sky-700 transition font-semibold">
+            Relancer un audit
+        </a>
+    </div>
+
+</section>
+{% endblock %}

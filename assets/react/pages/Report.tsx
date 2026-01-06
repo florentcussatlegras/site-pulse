@@ -60,22 +60,22 @@ export default function Report() {
 
     return (
         <PageTransition>
-            <section className="min-h-screen bg-neutral-50 px-4 py-10 w-full">
+            <section className="min-h-screen bg-content px-4 py-10 w-full">
 
                 {/* Header */}
                 <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between mb-8">
-                    <h1 className="text-2xl font-bold mb-4 sm:mb-0">
+                    <h1 className="text-2xl font-bold mb-4 sm:mb-0 text-primary">
                         Rapport d’audit
                     </h1>
 
                     <Link to="/">
-                        <Button variant="outline">← Nouvel audit</Button>
+                        <Button variant="outline" className="text-button-secondary bg-button-secondary border-color-button-secondary border cursor-pointer">← Nouvel audit</Button>
                     </Link>
                 </div>
 
                 {/* Résumé global */}
-                <Card className="max-w-6xl mx-auto text-center space-y-2 mb-8">
-                    <h2 className="text-xl font-semibold">Résumé</h2>
+                <Card className="max-w-6xl mx-auto text-center space-y-2 mb-8 bg-card-color rounded-2xl">
+                    <h2 className="text-xl font-semibold text-primary">Résumé</h2>
                     <p className="text-neutral-600">
                         {results.recommendations.length > 0
                             ? "Des optimisations sont recommandées pour améliorer les performances de votre site."
@@ -85,7 +85,7 @@ export default function Report() {
 
                 {/* Scores */}
                 <Card className="max-w-6xl mx-auto mb-8">
-                    <h2 className="text-lg font-bold mb-6 text-center">
+                    <h2 className="text-lg font-bold mb-6 text-center text-primary">
                         Scores par catégorie
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
@@ -107,7 +107,7 @@ export default function Report() {
 
                 {/* Recommandations */}
                 <Card className="max-w-6xl mx-auto space-y-4 mb-8">
-                    <h2 className="text-lg font-bold">
+                    <h2 className="text-lg font-bold text-primary">
                         Recommandations prioritaires
                     </h2>
                     <ul className="space-y-2 text-neutral-700">

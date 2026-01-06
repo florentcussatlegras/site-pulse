@@ -93,7 +93,7 @@ export default function AppLayout() {
                         onChange={(e) => setUrl(e.target.value)}
                         placeholder="https://exemple.com"
                         required
-                        className="flex-1 rounded-xl border border-neutral-200 p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="flex-1 rounded-xl border bg-color-input border-color-input text-primary p-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                     />
                     <Button type="submit" disabled={isLoading}>
                         {isLoading ? "Audit en cours…" : "Lancer l’audit"}
@@ -118,8 +118,8 @@ export default function AppLayout() {
             {results && <Dashboard results={results} />}
 
             {results && (
-                <Card className="max-w-xl text-center space-y-2">
-                    <p className="text-lg font-semibold">
+                <Card className="max-w-xl text-center space-y-2 border-color-card">
+                    <p className="text-lg font-semibold text-primary">
                         {auditSummary(results)}
                     </p>
                     <Link to={`/report/${auditId}`}>

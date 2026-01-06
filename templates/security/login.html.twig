@@ -6,7 +6,9 @@
 
     {% include 'components/ui/card.html.twig' with {
         content: '
-            <h1 class="text-3xl font-bold mb-4 text-neutral-900">Identifiez-vous</h1>
+            <h1 class="text-3xl font-bold mb-4 text-primary">
+                Identifiez-vous
+            </h1>
 
             ' ~ include("pages/partials/_alert.html.twig") ~ '
 
@@ -16,7 +18,9 @@
                     label: "Continuer avec Google",
                     href: path("connect_google"),
                     variant: "outline",
-                    class: "w-full flex justify-center items-center gap-2 border border-neutral-300",
+                    class: "w-full flex justify-center items-center gap-2
+                            border border-color-button
+                            text-primary",
                     icon: '
                         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-5 h-5">
                     '
@@ -24,9 +28,11 @@
 
                 ' ~ include("components/ui/button.html.twig", {
                     label: "Continuer avec GitHub",
-                    href: path('connect_github'),
+                    href: path("connect_github"),
                     variant: "outline",
-                    class: "w-full flex justify-center items-center gap-2 border border-neutral-300",
+                    class: "w-full flex justify-center items-center gap-2
+                            border border-color-button
+                            text-primary",
                     icon: '
                         <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path d="M12 0.297c-6.63 0-12 5.373-12 12 0 5.303
@@ -53,28 +59,56 @@
             </div>
 
             <div class="flex items-center my-6">
-                <div class="flex-1 border-t border-gray-200"></div>
-                <span class="px-3 text-gray-400 leading-none">ou</span>
-                <div class="flex-1 border-t border-gray-200"></div>
+                <div class="flex-1 border-t border-divider"></div>
+                <span class="px-3 text-primary leading-none">ou</span>
+                <div class="flex-1 border-t border-divider"></div>
             </div>
 
             ' ~ (error ? '<div class="alert alert-danger my-6">' ~ error.messageKey|trans(error.messageData, "security") ~ '</div>' : '') ~
 
             '<form action="' ~ path("app_login") ~ '" method="post" class="flex flex-col gap-4">
-                <label class="flex flex-col text-sm font-medium">
+
+                <label class="flex flex-col text-sm font-medium text-primary">
                     Email :
-                    <input type="email" name="_username" required class="mt-1 rounded-xl border border-neutral-200 p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <input
+                        type="email"
+                        name="_username"
+                        required
+                        class="mt-1 rounded-xl
+                               border border-color-input
+                               bg-color-input
+                               text-primary
+                               p-2
+                               focus:outline-none
+                               h-12
+                        "
+                    >
                 </label>
 
-                <label class="flex flex-col text-sm font-medium">
+                <label class="flex flex-col text-sm font-medium text-primary">
                     Mot de passe :
-                    <input type="password" name="_password" required class="mt-1 rounded-xl border border-neutral-200 p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <input
+                        type="password"
+                        name="_password"
+                        required
+                        class="mt-1 rounded-xl
+                               border border-color-input
+                               bg-color-input
+                               text-primary
+                               p-2
+                               focus:outline-none
+                               focus:ring-2 focus:ring-indigo-500 h-12"
+                    >
                     <p class="ml-auto text-sm mt-2">
-                        <a href="' ~ path("app_forgot_password") ~ '" class="text-indigo-600 hover:underline">Mot de passe oublié ?</a>
+                        <a href="' ~ path("app_forgot_password") ~ '"
+                           class="text-indigo-600 dark:text-indigo-400 hover:underline">
+                           Mot de passe oublié ?
+                        </a>
                     </p>
                 </label>
 
-                <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="' ~ csrf_token('authenticate') ~ '">
+                <input type="hidden" name="_csrf_token" value="' ~ csrf_token('authenticate') ~ '">
+
                 ' ~ include("components/ui/button.html.twig", {
                     label: "Se connecter",
                     type: "submit",
@@ -83,8 +117,12 @@
                 }) ~ '
             </form>
 
-            <p class="mt-4 text-sm">
-                Pas encore de compte ? <a href="' ~ path("app_register") ~ '" class="text-indigo-600 hover:underline">Inscrivez-vous</a>
+            <p class="mt-4 text-sm text-secondary">
+                Pas encore de compte ?
+                <a href="' ~ path("app_register") ~ '"
+                   class="text-indigo-600 dark:text-indigo-400 hover:underline">
+                   Inscrivez-vous
+                </a>
             </p>
         ',
         class: 'max-w-xl'

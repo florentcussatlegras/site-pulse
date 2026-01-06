@@ -4,7 +4,7 @@ import Card from "../ui/Card";
 
 function ScoreCardSkeleton() {
     return (
-        <div className="rounded-2xl border-neutral-200 bg-white shadow-soft p-4 space-y-3 animate-pulse">
+        <div className="rounded-2xl border-neutral-200 bg-color-card shadow-soft p-4 space-y-3 animate-pulse">
             {/* Label */}
             <div className="h-4 bg-neutral-200 rounded w-1/3" />
 

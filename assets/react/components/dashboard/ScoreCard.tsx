@@ -16,7 +16,7 @@ export default function ScoreCard({ label, score }: Props) {
     const meta = scoreMeta(score);
 
     return (
-        <Card className="p-4 shadow-soft transition hover:scale-[1.02] space-y-2 hover:shadow-lg">
+        <Card className="p-4 shadow-soft transition hover:scale-[1.02] space-y-2 hover:shadow-lg border border-color-card">
             <span className="text-sm font-semibold text-neutral-500">
                 {label}
             </span>

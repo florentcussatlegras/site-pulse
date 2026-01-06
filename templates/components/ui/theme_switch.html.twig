@@ -1,17 +1,47 @@
 {# templates/components/ui/theme_switch.html.twig #}
-<div {{ stimulus_controller('theme') }} class="fixed top-4 right-4 z-50">
-	<button
-		data-action="click->theme#toggle" class="px-4 py-2 rounded-xl bg-neutral-200 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 transition" aria-label="Toggle light/dark mode">
-		
-        {# Soleil caché par défaut #}
-        <svg data-theme-target="sun" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sun-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m8.66-8.66h1M3.34 12h1m14.32-5.66l.7.7M5.64 18.36l.7.7m12.02 0l-.7.7M6.34 5.64l-.7.7M12 7a5 5 0 100 10 5 5 0 000-10z" />
-        </svg>
+<div {{ stimulus_controller('theme') }}>
+  <button
+    type="button"
+    data-action="click->theme#toggle"
+    aria-label="Toggle light/dark mode"
+    class="
+      p-2
+      rounded-lg
+      bg-transparent
+      text-icon
+      transition
+      focus:outline-none
+      focus-visible:ring
+      focus-visible:ring-neutral-400
+      cursor-pointer
+    "
+  >
+    {# Soleil (visible en dark) #}
+    <svg
+      data-theme-target="sun"
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6 hidden"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 3v1m0 16v1m8.66-8.66h1M3.34 12h1m14.32-5.66l.7.7M5.64 18.36l.7.7m12.02 0l-.7.7M6.34 5.64l-.7.7M12 7a5 5 0 100 10 5 5 0 000-10z"
+      />
+    </svg>
 
-        {# Lune visible par défaut #}
-        <svg data-theme-target="moon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 moon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z" />
-        </svg>
-
-	</button>
+    {# Lune (visible en light) #}
+    <svg
+      data-theme-target="moon"
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"
+      />
+    </svg>
+  </button>
 </div>

@@ -1,32 +1,38 @@
-// assets/controllers/theme_controller.js
-import { Controller } from '@hotwired/stimulus';
+import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ['sun', 'moon'];
+  static targets = ["sun", "moon"];
 
   connect() {
     this.html = document.documentElement;
+
+    const storedTheme = localStorage.getItem("theme") || "light";
+    this.applyTheme(storedTheme);
     this.updateIcons();
   }
 
   toggle() {
-    this.html.classList.toggle('dark');
+    const nextTheme = this.html.classList.contains("dark")
+      ? "light"
+      : "dark";
 
-    // Sauvegarde du choix
-    localStorage.setItem('theme', this.html.classList.contains('dark') ? 'dark' : 'light');
+    localStorage.setItem("theme", nextTheme);
+    this.applyTheme(nextTheme);
+    this.updateIcons(); // ✅ MANQUAIT ICI
+  }
 
-    this.updateIcons();
+  applyTheme(theme) {
+    this.html.classList.remove("light", "dark");
+    this.html.classList.add(theme);
   }
 
   updateIcons() {
     if (!this.hasSunTarget || !this.hasMoonTarget) return;
 
-    if (this.html.classList.contains('dark')) {
-      this.sunTarget.classList.remove('hidden'); // montrer le soleil
-      this.moonTarget.classList.add('hidden');   // cacher la lune
-    } else {
-      this.sunTarget.classList.add('hidden');    // cacher le soleil
-      this.moonTarget.classList.remove('hidden');// montrer la lune
-    }
+    const isDark = this.html.classList.contains("dark");
+
+    // dark → afficher le soleil (retour light)
+    this.sunTarget.classList.toggle("hidden", !isDark);
+    this.moonTarget.classList.toggle("hidden", isDark);
   }
 }

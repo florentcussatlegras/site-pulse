@@ -1,0 +1,54 @@
+{# templates/audit/_score_card.html.twig #}
+
+{% set meta = {} %}
+
+{% if score < 50 %}
+    {% set meta = {
+        text: 'text-red-600',
+        bg: 'bg-red-100',
+        color: 'bg-red-500',
+        label: 'Faible'
+    } %}
+{% elseif score < 80 %}
+    {% set meta = {
+        text: 'text-orange-600',
+        bg: 'bg-orange-100',
+        color: 'bg-orange-500',
+        label: 'Moyen'
+    } %}
+{% else %}
+    {% set meta = {
+        text: 'text-green-600',
+        bg: 'bg-green-100',
+        color: 'bg-green-500',
+        label: 'Bon'
+    } %}
+{% endif %}
+
+<div class="p-4 shadow-soft transition hover:scale-[1.02] space-y-2 hover:shadow-lg border border-color-card rounded-xl bg-white">
+
+    <span class="text-sm font-semibold text-neutral-500">
+        {{ label }}
+    </span>
+
+    <p class="text-3xl font-bold mt-1 {{ meta.text }} transition-colors">
+        {{ score }}%
+    </p>
+
+    {# Progress bar #}
+    <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+        <div
+            class="h-full {{ meta.color }} transition-all duration-500"
+            style="width: {{ score }}%;"
+        ></div>
+    </div>
+
+    {# Badge #}
+    <span class="inline-flex px-3 py-1 rounded-full text-sm font-semibold
+                 {{ meta.bg }} {{ meta.text }}
+                 transition-all duration-500
+                 {{ score > 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-95' }}">
+        {{ meta.label }}
+    </span>
+
+</div>

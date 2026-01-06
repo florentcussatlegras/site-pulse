@@ -142,6 +142,22 @@ input.bg-color-input:-webkit-autofill {
   color: #f5f5f5;
 }
 
+.bg-btn-social {
+  background-color: #ffffff;
+}
+
+.dark .bg-btn-social {
+  background-color: #1f2937;
+}
+
+.bg-btn-social:hover {
+  background-color: #e5e5e5;
+}
+
+.dark .bg-btn-social:hover {
+  background-color: #4F46E5;
+}
+
 /* Base alert */
 .alert {
     border-radius: 0.75rem;          /* rounded-xl */

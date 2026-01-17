@@ -70,11 +70,11 @@ npm start
 
 ## 🎯 Utilisation
 
-Saisissez une url dans le champs de saisie de la page d'accueil
+- Saisissez une url dans le champs de saisie de la page d'accueil
 
-Accédez en détails aux résultats d'audit de l'url
+- Accédez en détails aux résultats d'audit de l'url
 
-Suivez vos activités d'audit depuis votre page de profil
+- Suivez vos activités d'audit depuis votre page de profil
 
 ---
 

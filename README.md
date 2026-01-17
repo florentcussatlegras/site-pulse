@@ -41,29 +41,55 @@ Le projet est développé avec **Symfony, ReactJS, TypeScript, TailwindCSS et Sy
 - Composer
 - Node.js / npm ou yarn
 
-### Cloner le projet :
+### Cloner le projet
 
 ```bash
 git clone https://github.com/florentcussatlegras/site-pulse.git
 cd site-pulse
 ```
 
-### Installer les dépendances
+### Installer les dépendances PHP
+Assurez-vous d’avoir PHP et Composer installés, puis :
+```bash
+composer install
+```
+
+### Configuration de l’environnement
+Copiez le fichier d’exemple et adaptez-le si nécessaire (base de données, etc.) :
+```bash
+cp .env .env.local
+```
+Modifiez ensuite .env.local selon votre configuration (DATABASE_URL, APP_ENV, etc.).
+
+### Installer les dépendances front (si Webpack Encore est utilisé)
 ```bash
 npm install
 ```
 
-### Lancer en développement
+### Lancer le serveur en développement
+Avec le serveur Symfony (recommandé)
+```bash
+symfony serve
+```
+
+### Compiler les assets en mode développement
 ```bash
 npm run dev
 ```
 
-### Ouvrez http://localhost:3000 dans votre navigateur.
+### Ouvrez l’application dans votre navigateur
+http://localhost:8000
 
 ### Compiler pour la production
+Compiler les assets front
 ```bash
 npm run build
-npm start
+```
+Préparer Symfony pour la production
+```bash
+composer install --no-dev --optimize-autoloader
+php bin/console cache:clear --env=prod
+php bin/console assets:install
 ```
 
 ---

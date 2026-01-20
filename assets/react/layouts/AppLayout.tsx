@@ -85,7 +85,7 @@ export default function AppLayout() {
             <Card className="w-full max-w-xl">
                 <form
                     onSubmit={handleSubmit}
-                    className="flex flex-col sm:flex-row gap-2"
+                    className="flex flex-col sm:flex-row gap-4"
                 >
                     <input
                         type="url"
